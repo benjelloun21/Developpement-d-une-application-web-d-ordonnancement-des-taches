@@ -1,0 +1,19 @@
+{% extends "partials/base.html" %}
+
+{% block title %}Home page {%  endblock %}
+
+
+
+{% block content%}
+{% if user.is_authenticated and user.is_staff and user.is_superuser %}
+{% include 'partials/topnav.html' %}
+<body>
+
+    <!-- Add an image using the <img> tag -->
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlivXXyG1gKaekMnSyXBohzFtIaqrixCWTNA&s" alt="Hello! and welcom to IO" style="width: 100%; height: auto; max-width: 800px; max-height: 600px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); transform: translateX(500px) translateY(20px);">
+    
+</body>
+{% else %}
+{% include 'Dashboard/staff_index.html' %}
+{% endif %}
+{% endblock %}

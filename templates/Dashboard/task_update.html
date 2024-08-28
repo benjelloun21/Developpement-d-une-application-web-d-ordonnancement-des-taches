@@ -1,0 +1,23 @@
+{% extends "partials/base.html" %}
+
+{% block title %}Update page{%  endblock %}
+
+{% block content%}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <div class="border bg-white p-3">
+                <h3>Edit Task</h3>
+                <hr>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form }}
+                    <a class="btn btn-secondary" href="{% url 'Dashboard-tasks' %}">Cancel</a>
+                    <input class="btn btn-info" type="submit" value="Update">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

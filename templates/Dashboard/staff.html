@@ -1,0 +1,52 @@
+{% extends "partials/base.html" %}
+
+{% block title %}Staff page{%  endblock %}
+
+{% block content%}
+{% include 'partials/topnav.html' %}
+ <!--Table-->
+ <div class="container">
+    <div class="row my-4">
+        <div class="col-md-4"></div>
+        <div class="col-md-8">
+            <table class="table bg-white">
+                <thead class="bg-info">
+                    <tr class="text-white">
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Job title</th>
+                        <th scope="col">Assigned Task</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user, tasks in user_tasks %}
+                    <tr>
+                        <th scope="row"><a class="btn btn-primary" href="{% url 'Dashboard-staff-detail' user.id %}">View</a></h>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.profile.phone }}</td>
+                        <td>{{ user.profile.jobtitle }}</td>
+                        <td>
+                            {% for task in tasks %}
+                                {{ task.Attribute }}
+                            {% empty %}
+                                No tasks assigned
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--End Table-->
+{% endblock %}

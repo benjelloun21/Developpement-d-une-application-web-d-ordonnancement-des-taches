@@ -1,0 +1,54 @@
+{% extends "partials/base.html" %}
+
+
+
+{% block title %}Progress page{% endblock %}
+
+{% block content %}
+{% include 'partials/topnav.html' %}
+ <!--Table-->
+ <div class="container">
+    <div class="row my-4">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+            <table class="table bg-white">
+                <thead class="bg-info">
+                    <tr class="text-white">
+                        <th scope="col">Attribute</th>
+                        <th scope="col">Task</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Predecessors</th>
+                        <th scope="col">Progress</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.Attribute }}</td>
+                        <td>{{ item.Task }}</td>
+                        <td>{{ item.Duration }}</td>
+                        <td>{{ item.Predecessors }}</td>
+                        <td>
+                            {% if item.Progress != 'Done' %}
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="task_id" value="{{ item.id }}">
+                                
+                                {{ form1.Progress }} 
+                                <button type="submit">Update</button>
+                            </form>
+                            {{ item.Progress }}
+                            {% else %}
+                            Done
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--End Table-->
+{% endblock %}

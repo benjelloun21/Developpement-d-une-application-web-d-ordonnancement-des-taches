@@ -1,0 +1,64 @@
+{% extends "partials/base.html" %}
+
+{% block title %}Tasks page{%  endblock %}
+
+{% block content %}
+{% include 'partials/topnav.html' %}
+<!--Table-->
+<div class="container">
+    <div class="row my-4">
+        <div class="col-md-4">
+            <div class="border bg-white p-3">
+                <h4>Add Tasks</h4>
+                <hr>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input class="btn btn-success btn-block" type="submit" value="Add Task">
+                </form>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <table class="table bg-white">
+                <thead class="bg-info">
+                    <tr class="text-white">
+                        <th scope="col">Attribute</th>
+                        <th scope="col">Task</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Predecessors</th>
+                        <th scope="col">Earliest Start Time</th>
+                        <th scope="col">Latest Start Time</th>
+                        <th scope="col">Total Float</th>
+                        <th scope="col">Free Float</th>
+                        <th scope="col">Required Resource Type</th>
+                        <th scope="col">Assignedid</th>
+                        <th scope="col">Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.Attribute }}</td>
+                        <td>{{ item.Task }}</td>
+                        <td>{{ item.Duration }}</td>
+                        <td>{{ item.Predecessors }}</td>
+                        <td>{{ item.EarliestST }}</td>
+                        <td>{{ item.LatestST}}</td>
+                        <td>{{ item.tfloat }}</td>
+                        <td>{{ item.ffloat }}</td>
+                        <td>{{ item.RequiredRT }}</td>
+                        <td>{{ item.Staffid }}</td>
+                        <td>
+                            <a class="btn btn-info btn-sm" href="{% url 'Dashboard-tasks-update' item.id %}">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="{% url 'Dashboard-tasks-delete' item.id %}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{% url 'critical_path' %}" class="btn btn-primary">Voir le Chemin Critique</a>
+        </div>
+    </div>
+</div>
+<!--End Table-->
+{% endblock %}
